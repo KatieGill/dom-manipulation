@@ -38,4 +38,45 @@
  */
 
 // Your code goes here...
-initial commit 
+const container = document.querySelector('.cardsContainer');
+const cards = document.querySelectorAll('.card');
+
+const addFav = (id) => {
+  let favList = localStorage.getItem("favorites");
+  favList += `,${id}`;
+  localStorage.setItem("favorites", favList);
+}
+
+const removeFav = (id) => {
+  const favArr = localStorage.getItem('favorites').split(',');
+  favArr.splice(favArr.indexOf(id), 1).join(',');
+  localStorage.setItem('favorites', favArr);
+}
+
+const bgRed = (item) => {
+  if (!item.className.includes('red')) {
+    item.classList.add('red');
+  } else {
+    item.classList.remove('red');
+  }
+}
+
+container.addEventListener('click', function(e) {
+  const item = e.target;
+  const favArr = localStorage.getItem('favorites').split(',');
+  if (favArr.includes(item.id)) {
+    removeFav(item.id);
+  } else{
+    addFav(item.id);
+  }
+  bgRed(item);
+});
+
+for (const card of cards) {
+  const favArr = localStorage.getItem('favorites').split(',');
+  if (favArr.includes(card.id)) {
+    card.classList.add('red');
+  }
+}
+
+
