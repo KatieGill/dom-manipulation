@@ -49,12 +49,14 @@ const favs = document.getElementById('favs');
 // Your code goes here
 const updateCollections = (id, direction) => {
   const elm = document.getElementById(id);
-  if (direction === 'toMain') {
-    main.appendChild(elm);
-    elm.querySelector('i').classList.replace('fa-heart-crack', 'fa-heart-circle-plus');
-  } else if (direction === 'toFavs') {
-    favs.appendChild(elm);
-    elm.querySelector('i').classList.replace('fa-heart-circle-plus', 'fa-heart-crack');
+  if (elm) {
+    if (direction === 'toMain') {
+      main.appendChild(elm);
+      elm.querySelector('i').classList.replace('fa-heart-crack', 'fa-heart-circle-plus');
+    } else if (direction === 'toFavs') {
+      favs.appendChild(elm);
+      elm.querySelector('i').classList.replace('fa-heart-circle-plus', 'fa-heart-crack');
+    }
   }
  }
 

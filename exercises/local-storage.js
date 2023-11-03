@@ -44,7 +44,7 @@ const cards = document.querySelectorAll('.card');
 const addFav = (id) => {
   let favList = localStorage.getItem("favorites");
   favList += `,${id}`;
-  localStorage.setItem("favorites", favList);
+  localStorage.setItem('favorites', favList);
 }
 
 const removeFav = (id) => {
@@ -63,13 +63,19 @@ const bgRed = (item) => {
 
 container.addEventListener('click', function(e) {
   const item = e.target;
-  const favArr = localStorage.getItem('favorites').split(',');
-  if (favArr.includes(item.id)) {
-    removeFav(item.id);
-  } else{
-    addFav(item.id);
+  if (!item.className.includes('cardsContainer')) {
+    if (localStorage.getItem('favorites') === null) {
+      localStorage.setItem('favorites', item.id);
+    } else {
+      const favArr = localStorage.getItem('favorites').split(',');
+      if (favArr.includes(item.id)) {
+        removeFav(item.id);
+      } else{
+        addFav(item.id);
+      }
+    }
+    bgRed(item);
   }
-  bgRed(item);
 });
 
 for (const card of cards) {
